@@ -1,0 +1,93 @@
+﻿@model Tuple<int, int, IEnumerable<SysAdmin>>
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@section styles{
+    <link href="~/Areas/Admin/Content/plugin/site/form.css" rel="stylesheet" />
+}
+<div class="row">
+    <div class="col-lg-6">
+        <form class="form-inline">
+            <div class="form-group">
+                <input type="text" name="keyword" value="@(Request.GetQueryString("keyword"))" placeholder="输入关键字" class="input-sm form-control">
+            </div>
+            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-search"></i> 搜索</button>
+        </form>
+    </div>
+    <div class="col-lg-4"></div>
+    <div class="col-lg-2">
+        <div class="input-group pull-right">
+            <a href="/Admin/Authority/Admin" title="新增管理员" class="btn btn-sm btn-primary btn-frame" size='["60%","500px"]'><i class="fa fa-plus"></i> 新增</a>
+            <a href="javascript:;" data-url="/Admin/Authority/AdminDelete" confirm class="btn btn-sm btn-danger btn-post-check"><i class="fa fa-trash"></i> 删除</a>
+        </div>
+    </div>
+</div>
+<div class="space10"></div>
+<table class="table table-condensed table-hover">
+    <thead>
+        <tr>
+            <th width="50">ID</th>
+            <th width="100">登录名</th>
+            <th width="100">姓名</th>
+            <th width="200">登录IP</th>
+            <th width="200">登录时间</th>
+            <th width="100">超级管理员</th>
+            <th width="100">操作</th>
+            <th width="30">
+                <div data-toggle="tooltip" data-title="Check All" class="checkbox c-checkbox">
+                    <label>
+                        <input class="checkAll" type="checkbox">
+                        <span class="fa fa-check"></span>
+                    </label>
+                </div>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (var item in Model.Item3)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>
+                        @item.UserName
+                    </td>
+                    <td>@item.Name</td>
+                    <td>@item.LastLoginIp</td>
+                    <td>@item.LastLoginTime</td>
+                    <td>
+                        @if (item.IsAdmin)
+                {
+                            <i class="fa fa-check text-success"></i>
+                        }
+                        else
+                        {
+                            <i class="fa fa-close text-warning"></i>
+                        }
+                    </td>
+                    <td><a href="/Admin/Authority/Admin?id=@item.Id" title="编辑管理员-@item.Name" class="btn-frame btn btn-sm btn-success" size='["60%","500px"]'>编辑</a></td>
+                    <td>
+                        <div class="checkbox c-checkbox">
+                            <label>
+                                <input name="check-item" value="@item.Id" type="checkbox">
+                                <span class="fa fa-check"></span>
+                            </label>
+                        </div>
+                    </td>
+                </tr>                　
+            }
+        }
+    </tbody>
+    @if (Model.Item3.Count() == 0)
+    {
+        <tfoot>
+            <tr>
+                <td colspan="8" align="center">暂无数据</td>
+            </tr>
+        </tfoot>
+    }
+</table>
+
+@Html.Pager(15, Request.GetQueryInt("page", 1), Model.Item1)
+

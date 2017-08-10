@@ -1,0 +1,739 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EntityModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="SysAction">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ActionCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ActionIcon" Type="nvarchar" MaxLength="50" />
+          <Property Name="ActionTitle" Type="nvarchar" MaxLength="10" />
+          <Property Name="IsShow" Type="int" Nullable="false" />
+          <Property Name="CreatedTime" Type="datetime" Nullable="false" />
+          <Property Name="UpdateTime" Type="datetime" Nullable="false" />
+          <Property Name="RowVersion" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SysAdmin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="LastLoginTime" Type="datetime" Nullable="false" />
+          <Property Name="LastLoginIp" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsAdmin" Type="bit" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+          <Property Name="CreatedTime" Type="datetime" Nullable="false" />
+          <Property Name="UpdateTime" Type="datetime" Nullable="false" />
+          <Property Name="RowVersion" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SysAdminRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AdminId" Type="int" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="CreatedTime" Type="datetime" Nullable="false" />
+          <Property Name="UpdateTime" Type="datetime" Nullable="false" />
+          <Property Name="RowVersion" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SysLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LogContent" Type="ntext" Nullable="false" />
+          <Property Name="LogIp" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LogType" Type="int" Nullable="false" />
+          <Property Name="LogUrl" Type="nvarchar" MaxLength="300" />
+          <Property Name="CreatedTime" Type="datetime" Nullable="false" />
+          <Property Name="UpdateTime" Type="datetime" Nullable="false" />
+          <Property Name="RowVersion" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SysMenu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Controller" Type="nvarchar" MaxLength="50" />
+          <Property Name="Action" Type="nvarchar" MaxLength="50" />
+          <Property Name="Url" Type="nvarchar" MaxLength="100" />
+          <Property Name="ParentId" Type="int" />
+          <Property Name="IsShow" Type="bit" Nullable="false" />
+          <Property Name="SortId" Type="int" Nullable="false" />
+          <Property Name="CreatedTime" Type="datetime" Nullable="false" />
+          <Property Name="UpdateTime" Type="datetime" Nullable="false" />
+          <Property Name="RowVersion" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SysRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+          <Property Name="CreatedTime" Type="datetime" Nullable="false" />
+          <Property Name="UpdateTime" Type="datetime" Nullable="false" />
+          <Property Name="RowVersion" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SysRoleAction">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="ActionId" Type="int" Nullable="false" />
+          <Property Name="CreatedTime" Type="datetime" Nullable="false" />
+          <Property Name="UpdateTime" Type="datetime" Nullable="false" />
+          <Property Name="RowVersion" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SysRoleMenu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="MenuId" Type="int" Nullable="false" />
+          <Property Name="CreatedTime" Type="datetime" Nullable="false" />
+          <Property Name="UpdateTime" Type="datetime" Nullable="false" />
+          <Property Name="RowVersion" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NickName" Type="nvarchar" MaxLength="30" />
+          <Property Name="RealName" Type="nvarchar" MaxLength="15" />
+          <Property Name="VerificationCode" Type="nvarchar" MaxLength="10" />
+          <Property Name="BirthAge" Type="datetime" />
+          <Property Name="sex" Type="int" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="20" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsCertification" Type="int" Nullable="false" />
+          <Property Name="UserType" Type="int" Nullable="false" />
+          <Property Name="IdCard" Type="nvarchar" MaxLength="20" />
+          <Property Name="HeadImg" Type="nvarchar" MaxLength="200" />
+          <Property Name="MemberNumber" Type="nvarchar" MaxLength="30" />
+          <Property Name="bgpic" Type="nvarchar" MaxLength="200" />
+          <Property Name="Career" Type="nvarchar" MaxLength="20" />
+          <Property Name="Level" Type="int" Nullable="false" />
+          <Property Name="integral" Type="int" Nullable="false" />
+          <Property Name="Qrcode" Type="nvarchar" MaxLength="200" />
+          <Property Name="IsInfo" Type="bit" Nullable="false" />
+          <Property Name="linkren" Type="nvarchar" MaxLength="20" />
+          <Property Name="StartTime" Type="datetime" />
+          <Property Name="EndTime" Type="datetime" />
+          <Property Name="CreatedTime" Type="datetime" Nullable="false" />
+          <Property Name="UpdateTime" Type="datetime" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="RowVersion" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_SysAdminRole_SysAdmin">
+          <End Role="SysAdmin" Type="Self.SysAdmin" Multiplicity="1" />
+          <End Role="SysAdminRole" Type="Self.SysAdminRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysAdmin">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysAdminRole">
+              <PropertyRef Name="AdminId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SysAdminRole_SysRole">
+          <End Role="SysRole" Type="Self.SysRole" Multiplicity="1" />
+          <End Role="SysAdminRole" Type="Self.SysAdminRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysRole">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysAdminRole">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SysMenu_SysMenu">
+          <End Role="SysMenu" Type="Self.SysMenu" Multiplicity="0..1" />
+          <End Role="SysMenu1" Type="Self.SysMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysMenu">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysMenu1">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SysRoleAction_SysAction">
+          <End Role="SysAction" Type="Self.SysAction" Multiplicity="1" />
+          <End Role="SysRoleAction" Type="Self.SysRoleAction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysAction">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysRoleAction">
+              <PropertyRef Name="ActionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SysRoleAction_SysRole">
+          <End Role="SysRole" Type="Self.SysRole" Multiplicity="1" />
+          <End Role="SysRoleAction" Type="Self.SysRoleAction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysRole">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysRoleAction">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SysRoleMenu_SysMenu">
+          <End Role="SysMenu" Type="Self.SysMenu" Multiplicity="1" />
+          <End Role="SysRoleMenu" Type="Self.SysRoleMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysMenu">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysRoleMenu">
+              <PropertyRef Name="MenuId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SysRoleMenu_SysRole">
+          <End Role="SysRole" Type="Self.SysRole" Multiplicity="1" />
+          <End Role="SysRoleMenu" Type="Self.SysRoleMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysRole">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysRoleMenu">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EntityModelStoreContainer">
+          <EntitySet Name="SysAction" EntityType="Self.SysAction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SysAdmin" EntityType="Self.SysAdmin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SysAdminRole" EntityType="Self.SysAdminRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SysLog" EntityType="Self.SysLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SysMenu" EntityType="Self.SysMenu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SysRole" EntityType="Self.SysRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SysRoleAction" EntityType="Self.SysRoleAction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SysRoleMenu" EntityType="Self.SysRoleMenu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_SysAdminRole_SysAdmin" Association="Self.FK_SysAdminRole_SysAdmin">
+            <End Role="SysAdmin" EntitySet="SysAdmin" />
+            <End Role="SysAdminRole" EntitySet="SysAdminRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SysAdminRole_SysRole" Association="Self.FK_SysAdminRole_SysRole">
+            <End Role="SysRole" EntitySet="SysRole" />
+            <End Role="SysAdminRole" EntitySet="SysAdminRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SysMenu_SysMenu" Association="Self.FK_SysMenu_SysMenu">
+            <End Role="SysMenu" EntitySet="SysMenu" />
+            <End Role="SysMenu1" EntitySet="SysMenu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SysRoleAction_SysAction" Association="Self.FK_SysRoleAction_SysAction">
+            <End Role="SysAction" EntitySet="SysAction" />
+            <End Role="SysRoleAction" EntitySet="SysRoleAction" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SysRoleAction_SysRole" Association="Self.FK_SysRoleAction_SysRole">
+            <End Role="SysRole" EntitySet="SysRole" />
+            <End Role="SysRoleAction" EntitySet="SysRoleAction" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SysRoleMenu_SysMenu" Association="Self.FK_SysRoleMenu_SysMenu">
+            <End Role="SysMenu" EntitySet="SysMenu" />
+            <End Role="SysRoleMenu" EntitySet="SysRoleMenu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SysRoleMenu_SysRole" Association="Self.FK_SysRoleMenu_SysRole">
+            <End Role="SysRole" EntitySet="SysRole" />
+            <End Role="SysRoleMenu" EntitySet="SysRoleMenu" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EntityModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="SysLog" EntityType="EntityModel.SysLog" />
+          <EntitySet Name="SysAction" EntityType="EntityModel.SysAction" />
+          <EntitySet Name="SysAdmin" EntityType="EntityModel.SysAdmin" />
+          <EntitySet Name="SysAdminRole" EntityType="EntityModel.SysAdminRole" />
+          <EntitySet Name="SysMenu" EntityType="EntityModel.SysMenu" />
+          <EntitySet Name="SysRole" EntityType="EntityModel.SysRole" />
+          <EntitySet Name="SysRoleAction" EntityType="EntityModel.SysRoleAction" />
+          <EntitySet Name="SysRoleMenu" EntityType="EntityModel.SysRoleMenu" />
+          <EntitySet Name="Users" EntityType="EntityModel.Users" />
+          <AssociationSet Name="FK_SysRoleAction_SysAction" Association="EntityModel.FK_SysRoleAction_SysAction">
+            <End Role="SysAction" EntitySet="SysAction" />
+            <End Role="SysRoleAction" EntitySet="SysRoleAction" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SysAdminRole_SysAdmin" Association="EntityModel.FK_SysAdminRole_SysAdmin">
+            <End Role="SysAdmin" EntitySet="SysAdmin" />
+            <End Role="SysAdminRole" EntitySet="SysAdminRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SysAdminRole_SysRole" Association="EntityModel.FK_SysAdminRole_SysRole">
+            <End Role="SysRole" EntitySet="SysRole" />
+            <End Role="SysAdminRole" EntitySet="SysAdminRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SysMenu_SysMenu" Association="EntityModel.FK_SysMenu_SysMenu">
+            <End Role="SysMenu" EntitySet="SysMenu" />
+            <End Role="SysMenu1" EntitySet="SysMenu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SysRoleMenu_SysMenu" Association="EntityModel.FK_SysRoleMenu_SysMenu">
+            <End Role="SysMenu" EntitySet="SysMenu" />
+            <End Role="SysRoleMenu" EntitySet="SysRoleMenu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SysRoleAction_SysRole" Association="EntityModel.FK_SysRoleAction_SysRole">
+            <End Role="SysRole" EntitySet="SysRole" />
+            <End Role="SysRoleAction" EntitySet="SysRoleAction" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SysRoleMenu_SysRole" Association="EntityModel.FK_SysRoleMenu_SysRole">
+            <End Role="SysRole" EntitySet="SysRole" />
+            <End Role="SysRoleMenu" EntitySet="SysRoleMenu" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="SysLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LogContent" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LogIp" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LogType" Type="Int32" Nullable="false" />
+          <Property Name="LogUrl" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RowVersion" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SysAction">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ActionCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ActionIcon" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ActionTitle" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="IsShow" Type="Int32" Nullable="false" />
+          <Property Name="CreatedTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RowVersion" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="SysRoleAction" Relationship="EntityModel.FK_SysRoleAction_SysAction" FromRole="SysAction" ToRole="SysRoleAction" />
+        </EntityType>
+        <EntityType Name="SysAdmin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="LastLoginTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastLoginIp" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsAdmin" Type="Boolean" Nullable="false" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RowVersion" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="SysAdminRole" Relationship="EntityModel.FK_SysAdminRole_SysAdmin" FromRole="SysAdmin" ToRole="SysAdminRole" />
+        </EntityType>
+        <EntityType Name="SysAdminRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AdminId" Type="Int32" Nullable="false" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RowVersion" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="SysAdmin" Relationship="EntityModel.FK_SysAdminRole_SysAdmin" FromRole="SysAdminRole" ToRole="SysAdmin" />
+          <NavigationProperty Name="SysRole" Relationship="EntityModel.FK_SysAdminRole_SysRole" FromRole="SysAdminRole" ToRole="SysRole" />
+        </EntityType>
+        <EntityType Name="SysMenu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Controller" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Action" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Url" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ParentId" Type="Int32" />
+          <Property Name="IsShow" Type="Boolean" Nullable="false" />
+          <Property Name="SortId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RowVersion" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="SysMenu1" Relationship="EntityModel.FK_SysMenu_SysMenu" FromRole="SysMenu" ToRole="SysMenu1" />
+          <NavigationProperty Name="SysMenu2" Relationship="EntityModel.FK_SysMenu_SysMenu" FromRole="SysMenu1" ToRole="SysMenu" />
+          <NavigationProperty Name="SysRoleMenu" Relationship="EntityModel.FK_SysRoleMenu_SysMenu" FromRole="SysMenu" ToRole="SysRoleMenu" />
+        </EntityType>
+        <EntityType Name="SysRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RowVersion" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="SysAdminRole" Relationship="EntityModel.FK_SysAdminRole_SysRole" FromRole="SysRole" ToRole="SysAdminRole" />
+          <NavigationProperty Name="SysRoleAction" Relationship="EntityModel.FK_SysRoleAction_SysRole" FromRole="SysRole" ToRole="SysRoleAction" />
+          <NavigationProperty Name="SysRoleMenu" Relationship="EntityModel.FK_SysRoleMenu_SysRole" FromRole="SysRole" ToRole="SysRoleMenu" />
+        </EntityType>
+        <EntityType Name="SysRoleAction">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="ActionId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RowVersion" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="SysAction" Relationship="EntityModel.FK_SysRoleAction_SysAction" FromRole="SysRoleAction" ToRole="SysAction" />
+          <NavigationProperty Name="SysRole" Relationship="EntityModel.FK_SysRoleAction_SysRole" FromRole="SysRoleAction" ToRole="SysRole" />
+        </EntityType>
+        <EntityType Name="SysRoleMenu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="MenuId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RowVersion" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="SysMenu" Relationship="EntityModel.FK_SysRoleMenu_SysMenu" FromRole="SysRoleMenu" ToRole="SysMenu" />
+          <NavigationProperty Name="SysRole" Relationship="EntityModel.FK_SysRoleMenu_SysRole" FromRole="SysRoleMenu" ToRole="SysRole" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NickName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="RealName" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="VerificationCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="BirthAge" Type="DateTime" Precision="3" />
+          <Property Name="sex" Type="Int32" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsCertification" Type="Int32" Nullable="false" />
+          <Property Name="UserType" Type="Int32" Nullable="false" />
+          <Property Name="IdCard" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="HeadImg" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="MemberNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="bgpic" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Career" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Level" Type="Int32" Nullable="false" />
+          <Property Name="integral" Type="Int32" Nullable="false" />
+          <Property Name="Qrcode" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="IsInfo" Type="Boolean" Nullable="false" />
+          <Property Name="linkren" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="StartTime" Type="DateTime" Precision="3" />
+          <Property Name="EndTime" Type="DateTime" Precision="3" />
+          <Property Name="CreatedTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="RowVersion" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <Association Name="FK_SysRoleAction_SysAction">
+          <End Type="EntityModel.SysAction" Role="SysAction" Multiplicity="1" />
+          <End Type="EntityModel.SysRoleAction" Role="SysRoleAction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysAction">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysRoleAction">
+              <PropertyRef Name="ActionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SysAdminRole_SysAdmin">
+          <End Type="EntityModel.SysAdmin" Role="SysAdmin" Multiplicity="1" />
+          <End Type="EntityModel.SysAdminRole" Role="SysAdminRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysAdmin">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysAdminRole">
+              <PropertyRef Name="AdminId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SysAdminRole_SysRole">
+          <End Type="EntityModel.SysRole" Role="SysRole" Multiplicity="1" />
+          <End Type="EntityModel.SysAdminRole" Role="SysAdminRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysRole">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysAdminRole">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SysMenu_SysMenu">
+          <End Type="EntityModel.SysMenu" Role="SysMenu" Multiplicity="0..1" />
+          <End Type="EntityModel.SysMenu" Role="SysMenu1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysMenu">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysMenu1">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SysRoleMenu_SysMenu">
+          <End Type="EntityModel.SysMenu" Role="SysMenu" Multiplicity="1" />
+          <End Type="EntityModel.SysRoleMenu" Role="SysRoleMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysMenu">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysRoleMenu">
+              <PropertyRef Name="MenuId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SysRoleAction_SysRole">
+          <End Type="EntityModel.SysRole" Role="SysRole" Multiplicity="1" />
+          <End Type="EntityModel.SysRoleAction" Role="SysRoleAction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysRole">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysRoleAction">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SysRoleMenu_SysRole">
+          <End Type="EntityModel.SysRole" Role="SysRole" Multiplicity="1" />
+          <End Type="EntityModel.SysRoleMenu" Role="SysRoleMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysRole">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysRoleMenu">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EntityModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="SysLog">
+            <EntityTypeMapping TypeName="EntityModel.SysLog">
+              <MappingFragment StoreEntitySet="SysLog">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+                <ScalarProperty Name="LogUrl" ColumnName="LogUrl" />
+                <ScalarProperty Name="LogType" ColumnName="LogType" />
+                <ScalarProperty Name="LogIp" ColumnName="LogIp" />
+                <ScalarProperty Name="LogContent" ColumnName="LogContent" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SysAction">
+            <EntityTypeMapping TypeName="EntityModel.SysAction">
+              <MappingFragment StoreEntitySet="SysAction">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+                <ScalarProperty Name="IsShow" ColumnName="IsShow" />
+                <ScalarProperty Name="ActionTitle" ColumnName="ActionTitle" />
+                <ScalarProperty Name="ActionIcon" ColumnName="ActionIcon" />
+                <ScalarProperty Name="ActionCode" ColumnName="ActionCode" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SysAdmin">
+            <EntityTypeMapping TypeName="EntityModel.SysAdmin">
+              <MappingFragment StoreEntitySet="SysAdmin">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+                <ScalarProperty Name="LastLoginIp" ColumnName="LastLoginIp" />
+                <ScalarProperty Name="LastLoginTime" ColumnName="LastLoginTime" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SysAdminRole">
+            <EntityTypeMapping TypeName="EntityModel.SysAdminRole">
+              <MappingFragment StoreEntitySet="SysAdminRole">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SysMenu">
+            <EntityTypeMapping TypeName="EntityModel.SysMenu">
+              <MappingFragment StoreEntitySet="SysMenu">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+                <ScalarProperty Name="SortId" ColumnName="SortId" />
+                <ScalarProperty Name="IsShow" ColumnName="IsShow" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="Controller" ColumnName="Controller" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SysRole">
+            <EntityTypeMapping TypeName="EntityModel.SysRole">
+              <MappingFragment StoreEntitySet="SysRole">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SysRoleAction">
+            <EntityTypeMapping TypeName="EntityModel.SysRoleAction">
+              <MappingFragment StoreEntitySet="SysRoleAction">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+                <ScalarProperty Name="ActionId" ColumnName="ActionId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SysRoleMenu">
+            <EntityTypeMapping TypeName="EntityModel.SysRoleMenu">
+              <MappingFragment StoreEntitySet="SysRoleMenu">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+                <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="EntityModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="linkren" ColumnName="linkren" />
+                <ScalarProperty Name="IsInfo" ColumnName="IsInfo" />
+                <ScalarProperty Name="Qrcode" ColumnName="Qrcode" />
+                <ScalarProperty Name="integral" ColumnName="integral" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="Career" ColumnName="Career" />
+                <ScalarProperty Name="bgpic" ColumnName="bgpic" />
+                <ScalarProperty Name="MemberNumber" ColumnName="MemberNumber" />
+                <ScalarProperty Name="HeadImg" ColumnName="HeadImg" />
+                <ScalarProperty Name="IdCard" ColumnName="IdCard" />
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="IsCertification" ColumnName="IsCertification" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="sex" ColumnName="sex" />
+                <ScalarProperty Name="BirthAge" ColumnName="BirthAge" />
+                <ScalarProperty Name="VerificationCode" ColumnName="VerificationCode" />
+                <ScalarProperty Name="RealName" ColumnName="RealName" />
+                <ScalarProperty Name="NickName" ColumnName="NickName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

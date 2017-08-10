@@ -1,0 +1,96 @@
+﻿@{
+    var admin = ViewBag.Admin as Weeho.Logon.Admin.UserLoginData;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="Keywords" content="@ViewBag.Keywords">
+    <meta name="Description" content="@ViewBag.Description">
+    <meta name="application-name" content="@ViewBag.Title">
+    <meta name="msapplication-tooltip" content="@ViewBag.Title">
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="bookmark" href="/favicon.ico" />
+    <link href="~/Areas/Admin/Content/plugin/fontawesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/plugin/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/plugin/layer/skin/layer.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/plugin/site/main.css" rel="stylesheet" />
+    @RenderSection("styles", required: false)
+</head>
+<body>
+    <div class="wrapper">
+        @if (ViewBag.Frame != null && ViewBag.Frame)
+        {
+            @RenderBody()
+        }
+        else
+        {
+            <!-- top navbar-->
+            <header class="topnavbar-wrapper">
+                <!-- START Top Navbar-->
+                <nav role="navigation" class="navbar topnavbar">
+                    <!-- START navbar header-->
+                    <div class="navbar-header">
+                        <a href="/Admin" class="navbar-brand">
+                            <div class="brand-logo" style="min-width:250px;display:inline-block">
+                                <img src="~/Areas/Admin/Content/images/logo100_100.png" style="width:auto;height:auto;padding:0px 0px 5px 0px; display:inline-block" />
+                                <h4 style="padding:3px 10px;display:inline-block;text-align:center">后台管理系统</h4>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="navbar-content">
+                        @*<ul class="nav navbar-nav">
+                                <li>
+                                    <a href="/">预览网站</a>
+                                </li>
+                            </ul>*@
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" href="javascript:;" data-toggle="dropdown">
+                                    <span class="glyphicon glyphicon-user"></span>
+                                    @admin.NickName
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="user-menu">
+                                    @*<li role="presentation"><a role="menuitem" tabindex="-1" class="btn-frame" size="['60%','300px']" title="修改密码" href="/Admin/Account/ChangePassword">修改密码</a></li>*@
+                                    @*<li role="presentation" class="divider"></li>*@
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="/Admin/Account/Logout?returnUrl=@(Request.RawUrl)">退出登录</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+            @Html.Partial("_SideBar")
+            <!-- Main section-->
+            <section>
+                <!-- Page content-->
+                <div class="content-wrapper">
+                    @*<div class="content-heading">
+                            <h4>@ViewBag.Title</h4>
+                        </div>*@
+                    <ol class="breadcrumb bread-primary ">
+                        <li><a href="/Admin"><i class="fa fa-home"></i> 首页</a></li>
+                        @if (ViewBag.Parent != null)
+                        {
+                            Tuple<string, string> parent = ViewBag.Parent;
+                            <li><a href="@parent.Item2">@parent.Item1</a></li>
+                        }
+                        <li>@ViewBag.Title</li>
+                    </ol>
+                    @RenderBody()
+                </div>
+            </section>
+
+        }
+    </div>
+    <script src="~/Areas/Admin/Content/plugin/jquery/jquery-1.11.3.min.js"></script>
+    <script src="~/Areas/Admin/Content/plugin/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/Areas/Admin/Content/plugin/layer/layer.js"></script>
+    <script src="~/Areas/Admin/Content/plugin/jquery/jquery.sticky-kit.min.js"></script>
+    <script src="~/Areas/Admin/Content/plugin/site/global.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

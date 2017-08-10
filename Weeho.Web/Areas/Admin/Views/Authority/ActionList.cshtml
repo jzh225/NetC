@@ -1,0 +1,89 @@
+﻿@model Tuple<int, int, IEnumerable<SysAction>>
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@section styles{
+    <link href="~/Areas/Admin/Content/plugin/site/form.css" rel="stylesheet" />
+}
+<div class="row">
+    <div class="col-lg-6">
+        <form class="form-inline">
+            <div class="form-group">
+                <input type="text" name="keyword" value="@(Request.GetQueryString("keyword"))" placeholder="输入关键字" class="input-sm form-control">
+            </div>
+            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-search"></i> 搜索</button>
+        </form>
+    </div>
+    <div class="col-lg-4"></div>
+    <div class="col-lg-2">
+        <div class="input-group pull-right">
+            <a href="/Admin/Authority/Action" title="新增权限项" class="btn btn-sm btn-primary btn-frame" size='["60%","320px"]'><i class="fa fa-plus"></i> 新增</a>
+            <a href="javascript:;" data-url="/Admin/Authority/ActionDelete" confirm class="btn btn-sm btn-danger btn-post-check"><i class="fa fa-trash"></i> 删除</a>
+        </div>
+    </div>
+</div>
+<div class="space10"></div>
+<table class="table table-condensed table-hover">
+    <thead>
+        <tr>
+            <th width="50">ID</th>
+            <th width="200">名称</th>
+            <th width="200">ActionCode</th>
+            <th width="200">图标</th>
+            <th width="100">标题</th>
+            <th width="100">创建时间</th>
+            <th width="100">操作</th>
+            <th width="50">
+                <div data-toggle="tooltip" data-title="Check All" class="checkbox c-checkbox">
+                    <label>
+                        <input class="checkAll" type="checkbox">
+                        <span class="fa fa-check"></span>
+                    </label>
+                </div>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (var item in Model.Item3)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>
+                        @item.Name
+                    </td>
+                    <td>@item.ActionCode</td>
+                    <td>@item.ActionIcon</td>
+                    <td>@item.ActionTitle</td>
+                    <td>@item.CreatedTime.ToString("yyyy-MM-dd")</td>
+                    <td><a href="/Admin/Authority/Action?id=@item.Id" title="编辑权限项-@item.Name" class="btn-frame btn btn-sm btn-success" size='["60%","320px"]'>编辑</a></td>
+                    <td>
+                        <div class="checkbox c-checkbox">
+                            <label>
+                                <input name="check-item" value="@item.Id" type="checkbox">
+                                <span class="fa fa-check"></span>
+                            </label>
+                        </div>
+                    </td>
+                </tr>                　
+            }
+        }
+    </tbody>
+    @if (Model.Item3.Count() == 0)
+    {
+        <tfoot>
+            <tr>
+                <td colspan="9" align="center">暂无数据</td>
+            </tr>
+        </tfoot>
+    }
+
+</table>
+
+@Html.Pager(15, Request.GetQueryInt("page", 1), Model.Item1)
+
+
+
+
+

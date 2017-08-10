@@ -1,0 +1,92 @@
+﻿@model SysMenu
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    ViewBag.Frame = true;
+    bool create = Model.Id == 0;
+    ViewBag.Title = (create ? "新增" : "编辑") + "菜单项";
+}
+
+@section styles{
+    <link href="~/Areas/Admin/Content/plugin/select2/select2.min.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/plugin/site/form.css" rel="stylesheet" />
+}
+@section scripts{
+    <script src="~/Areas/Admin/Content/plugin/select2/select2.min.js"></script>
+    <script src="~/Areas/Admin/Content/plugin/select2/select2.extend.js"></script>
+    <script src="~/Areas/Admin/Content/plugin/jquery/validate.js"></script>
+}
+
+<div class="content-wrapper border">
+    <form method="post" class="form-horizontal vform" submit enctype="multipart/form-data">
+        <input type="hidden" name="Id" value="@Model.Id" />
+        <div class="form-group">
+            <label class="control-label"><span class="text-danger">*</span>名称</label>
+            <div class="control">
+                <input type="text" required data-maxl="50" name="Name" value="@Model.Name" class="form-control v">
+            </div>
+            <div class="tips">必填，任意字符，控制在50个字符内</div>
+        </div>
+        <div class="form-group">
+            <label class="control-label"><span class="text-danger">*</span>Controller</label>
+            <div class="control">
+                <input type="text" required data-maxl="50" name="Controller" value="@Model.Controller" class="form-control v">
+            </div>
+            <div class="tips">必填，任意字符，控制在50个字符内</div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Action</label>
+            <div class="control">
+                <input type="text" data-maxl="50" name="Action" value="@Model.Action" class="form-control v">
+            </div>
+            <div class="tips">非必填，任意字符，控制在50个字符内</div>
+        </div>
+        <div class="form-group">
+            <label class="control-label"><span class="text-danger">*</span>Url</label>
+            <div class="control">
+                <input type="text" required data-maxl="50" name="Url" value="@Model.Url" class="form-control v">
+            </div>
+            <div class="tips">必填，任意字符，控制在50个字符内</div>
+        </div>
+        <div class="form-group">
+            <label class="control-label"><span class="text-danger">*</span>父菜单</label>
+            <div class="control">
+                <select class="form-control v form-select" clear data-url="/Admin/Authority/MenuJson" placeholder="请选择父菜单" name="ParentId">
+                    @if (Model.ParentId > 0)
+                    {
+                        <option selected value="@Model.SysMenu2.Id">@Model.SysMenu2.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="tips">必填，任意字符，控制在50个字符内</div>
+        </div>
+        <div class="form-group">
+            <label class="control-label"><span class="text-danger">*</span>是否显示</label>
+            <div class="control">
+                <div class="checkbox c-checkbox">
+                    <label>
+                        <input name="IsShow" @(Model.IsShow ? "checked" : "") type="checkbox">
+                        <span class="fa fa-check"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="tips">是否显示在菜单栏</div>
+        </div>
+        <div class="form-group">
+            <label class="control-label"><span class="text-danger">*</span>序号</label>
+            <div class="control">
+                <input type="text" required data-vtype="int" name="SortId" value="@Model.SortId" class="form-control v">
+            </div>
+            <div class="tips">必填，正整数</div>
+        </div>
+        <div class="btn-group">
+            <a href="javascript:;" class="btn btn-default btn-return"><i class="fa fa-angle-left"></i> 返回</a>
+            @*@if (Model.Id > 0)
+                {
+                    <a href="/Admin/Security/Action" class="btn btn-info"><i class="fa fa-plus"></i> 新建</a>
+                }*@
+            <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> 保存</button>
+        </div>
+    </form>
+</div>
+

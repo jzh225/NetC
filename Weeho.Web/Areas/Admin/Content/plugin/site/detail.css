@@ -1,0 +1,6 @@
+﻿
+.detail { width:100%; padding-top:10px;}
+.form-group { position:relative;padding:15px;}
+.form-group .control { float:left; margin-left:20px; width:350px;}
+.form-group >label {width:130px; float:left; font-weight:normal;color:#6d7e86;text-align:right;}
+

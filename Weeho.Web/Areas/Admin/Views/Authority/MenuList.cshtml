@@ -1,0 +1,106 @@
+﻿@model IEnumerable<SysMenu>
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section styles{
+    <link href="~/Areas/Admin/Content/plugin/site/form.css" rel="stylesheet" />
+}
+
+@helper renderMenu(int parentId)
+{
+    foreach (var item in Model.Where(m => m.ParentId == parentId).OrderBy(m => m.SortId))
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.SortId</td>
+            <td>
+                @if (item.ParentId > 0)
+                {
+                    <span>├</span>
+                }
+                <i class="fa fa-folder-open"></i>
+                @item.Name
+            </td>
+            <td>@item.Controller</td>
+            <td>@item.Action</td>
+            <td>@item.Url</td>
+            <td>
+                @if (item.IsShow)
+                {
+                    <i class="fa fa-check text-success"></i>
+                }
+                else
+                {
+                    <i class="fa fa-close text-warning"></i>
+                }
+            </td>
+            <td>@item.CreatedTime.ToString("yyyy-MM-dd")</td>
+            <td><a href="/Admin/Authority/Menu?id=@item.Id" title="编辑菜单项-@item.Name" class="btn-frame btn btn-sm btn-success" size='["60%","450px"]'>编辑</a></td>
+            <td>
+                <div class="checkbox c-checkbox">
+                    <label>
+                        <input name="check-item" value="@item.Id" type="checkbox">
+                        <span class="fa fa-check"></span>
+                    </label>
+                </div>
+            </td>
+        </tr>
+        @renderMenu(item.Id)
+    }
+}
+
+<div class="row">
+    <div class="col-lg-6">
+        <form class="form-inline">
+            <div class="form-group">
+                <input type="text" name="keyword" value="@(Request.GetQueryString("keyword"))" placeholder="输入关键字" class="input-sm form-control">
+            </div>
+            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-search"></i> 搜索</button>
+        </form>
+    </div>
+    <div class="col-lg-4"></div>
+    <div class="col-lg-2">
+        <div class="input-group pull-right">
+            <a href="/Admin/Authority/Menu" title="新增菜单项" class="btn btn-sm btn-primary btn-frame" size='["60%","450px"]'><i class="fa fa-plus"></i> 新增</a>
+            <a href="javascript:;" data-url="/Admin/Authority/MenuDelete" confirm class="btn btn-sm btn-danger btn-post-check"><i class="fa fa-trash"></i> 删除</a>
+        </div>
+    </div>
+</div>
+<div class="space10"></div>
+<table class="table table-condensed table-hover">
+    <thead>
+        <tr>
+            <th width="50">ID</th>
+            <th width="50">序号</th>
+            <th width="170">名称</th>
+            <th width="100">Controller</th>
+            <th width="100">Action</th>
+            <th width="300">Url</th>
+            <th width="100">显示</th>
+            <th width="100">创建时间</th>
+            <th width="100">操作</th>
+            <th width="30">
+                <div data-toggle="tooltip" data-title="Check All" class="checkbox c-checkbox">
+                    <label>
+                        <input class="checkAll" type="checkbox">
+                        <span class="fa fa-check"></span>
+                    </label>
+                </div>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @renderMenu(0)
+    </tbody>
+    @if (Model.Count() == 0)
+    {
+        <tfoot>
+            <tr>
+                <td colspan="10" align="center">暂无数据</td>
+            </tr>
+        </tfoot>
+    }
+</table>
+

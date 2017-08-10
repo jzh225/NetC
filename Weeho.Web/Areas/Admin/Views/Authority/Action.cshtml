@@ -1,0 +1,60 @@
+﻿@model SysAction
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    ViewBag.Frame = true;
+    bool create = Model.Id == 0;
+    ViewBag.Title = (create ? "新增" : "编辑") + "权限项";
+}
+@section styles{
+    <link href="~/Areas/Admin/Content/plugin/site/form.css" rel="stylesheet" />
+}
+@section scripts{
+    <script src="~/Areas/Admin/Content/plugin/jquery/validate.js"></script>
+}
+
+<div class="content-wrapper border">
+    <form method="post" class="form-horizontal vform" submit enctype="multipart/form-data">
+        <input type="hidden" name="Id" value="@Model.Id" />
+        <div class="form-group">
+            <label class="control-label"><span class="text-danger">*</span>名称</label>
+            <div class="control">
+                <input type="text" required data-maxl="50" name="Name" value="@Model.Name" class="form-control v">
+            </div>
+            <div class="tips">必填，任意字符，控制在50个字符内</div>
+        </div>
+        <div class="form-group">
+            <label class="control-label"><span class="text-danger">*</span>ActionCode</label>
+            <div class="control">
+                <input type="text" required data-maxl="50" name="ActionCode" value="@Model.ActionCode" class="form-control v">
+            </div>
+            <div class="tips">必填，任意字符，控制在50个字符内</div>
+        </div>
+        <div class="form-group">
+            <label class="control-label"><span class="text-danger"></span>图标</label>
+            <div class="control">
+                <input type="text" data-maxl="50" name="ActionIcon" value="@Model.ActionIcon" class="form-control v">
+            </div>
+            <div class="tips">按钮图标</div>
+        </div>
+        <div class="form-group" style="padding-bottom:50px">
+            <label class="control-label"><span class="text-danger"></span>标题</label>
+            <div class="control">
+                <input type="text" data-maxl="50" name="ActionTitle" value="@Model.ActionTitle" class="form-control v">
+            </div>
+            <div class="tips">按钮标题</div>
+        </div>
+        <nav class="nav navbar-fixed-bottom">
+            <div class="btn-group">
+                <a href="javascript:;" class="btn btn-default btn-return"><i class="fa fa-angle-left"></i> 返回</a>
+                @*@if (Model.Id > 0)
+                    {
+                        <a href="/Admin/Security/Action" class="btn btn-info"><i class="fa fa-plus"></i> 新建</a>
+                    }*@
+                <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> 保存</button>
+            </div>
+        </nav>
+    </form>
+</div>
+
+

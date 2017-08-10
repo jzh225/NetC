@@ -1,0 +1,32 @@
+﻿
+.form { width:100%;}
+.form-horizontal { padding-top:10px;}
+.form-group { position:relative;}
+.form-group .control { float:left; margin-left:20px; width:350px;}
+.form-group .control-full { float:left; margin-left:20px; width:600px;}
+.form-group .control .form-control{ padding:5px; border:1px solid #ddd;font-size:12px;}
+
+.form-group.error .control .form-control{  border:1px solid #a94442;}
+
+.form-group .control input,.form-group .control select { height:30px;}
+
+.form-group .control-label {width:140px; float:left; font-weight:normal;color:#6d7e86;}
+.form-group .control .control-label{
+    text-align:left;
+}
+.form-group .tips {margin-left:530px;line-height:30px;color:#999;  }
+.form-group.error .tips {color:#a94442;  }
+
+.btn-group {width:100%; background-color:#fff;text-align:center;padding-left:125px;padding:10px 0 10px 125px; }
+.btn-group .btn { margin-left:10px !important;}
+
+.error.text-danger { position:absolute;width:200px;top:8px;}
+/*.select2-container { width:100% !important;}*/
+.form-inline .select2-container { width:240px !important;}
+.checkbox, .radio { margin-top: 0; margin-bottom: 0; }
+
+.detail { width:200px;min-height:80px;}
+/*input:not([type]), input[type="email"], input[type="number"],
+input[type="password"],
+input[type="tel"], input[type="url"],
+input[type="text"], select,textarea { width: 300px !important; }*/

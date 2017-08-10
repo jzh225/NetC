@@ -1,0 +1,54 @@
+﻿@{ 
+    var admin = ViewBag.Admin as Weeho.Logon.Admin.UserLoginData;
+
+    var menus = Weeho.Authority.MenuAuthority.GetMenu(admin.Id, admin.IsAdmin) as List<Weeho.Model.Custom.Menu>;
+
+    string controller = ViewContext.RouteData.Values["controller"].ToString().ToLower(),
+        action = ViewContext.RouteData.Values["action"].ToString().ToLower();
+}
+
+<aside class="aside">
+    <!-- START Sidebar (left)-->
+    <div class="aside-inner">
+        <nav data-sidebar-anyclick-close="" class="sidebar">
+            <!-- START sidebar nav-->
+            <h5>导航菜单</h5>
+            <ul class="nav">
+                @foreach (var menu in menus.Where(m => m.ParentId == 0).OrderBy(m => m.SortId))
+                {
+                    var active = menu.Controller.ToLower() == controller;
+                    var childMenus = menus.Where(m => m.ParentId == menu.Id).OrderBy(m => m.SortId);
+
+                    <li class="@(childMenus.Count() > 0 ? active ? "minus" : "plus" : "")">
+                        @if (childMenus.Count() > 0)
+                        {
+                            <a href="javascript:;" class="sidebar-toggle">
+                                <em class="fa fa-folder-o"></em>
+                                <span style="font-size:14px;">@menu.Name</span>
+                            </a>
+                            <ul class="nav  @(active?"":"hide")">
+                                @foreach (var childMenu in childMenus)
+                                {
+                                    active = childMenu.Controller.ToLower() == controller && childMenu.Action.ToLower() == action;
+                                    <li class="@(active?"active":"")">
+                                        <a href="@childMenu.Url">
+                                            <em class="fa fa-file-text"></em>
+                                            <span>@childMenu.Name</span>
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+                        }
+                        else
+                        {
+                            <a href="@(menu.Url)" class="@(active?"active":"")">
+                                <em class="fa fa-folder-o"></em>
+                                <span style="font-size:14px;">@menu.Name</span>
+                            </a>
+                        }
+                    </li>
+                }
+            </ul>
+        </nav>
+    </div>
+</aside>
